@@ -38,6 +38,35 @@ namespace VimPractice
 			ScoreShouldBe(_tennis, "Forty Love");
 		}
 
+		[Test]
+		public void Love_Fifteen()
+		{
+			GivenSecondPlayerScore(1);
+			ScoreShouldBe(_tennis, "Love Fifteen");
+		}
+
+		[Test]
+		public void Love_Thirty()
+		{
+			GivenSecondPlayerScore(2);
+			ScoreShouldBe(_tennis, "Love Thirty");
+		}
+
+		[Test]
+		public void Love_Forty()
+		{
+			GivenSecondPlayerScore(3);
+			ScoreShouldBe(_tennis, "Love Forty");
+		}
+
+		private void GivenSecondPlayerScore(int times)
+		{
+			for (int i = 0; i < times; i++)
+			{
+				_tennis.SecondPlayerScore();
+			}
+		}
+
 		private void GivenFirstPlayerScore(int times)
 		{
 			for (int i = 0; i < times; i++)
