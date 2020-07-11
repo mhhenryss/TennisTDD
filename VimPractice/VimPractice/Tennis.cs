@@ -7,20 +7,47 @@ namespace VimPractice
 		private int _firstPlayerScore;
 		private int _secondPlayerScore;
 
+		private Dictionary<int, string> _scoreLookup = new Dictionary<int, string>()
+		{
+			{0, "Love" },
+			{1, "Fifteen" },
+			{2, "Thirty" },
+			{3, "Forty" },
+		};
+
 		public string Score()
 		{
-			var scoreLookup = new Dictionary<int, string>()
+			if (_firstPlayerScore != _secondPlayerScore)
 			{
-				{0, "Love" },
-				{1, "Fifteen" },
-				{2, "Thirty" },
-				{3, "Forty" },
-			};
-			if (_firstPlayerScore > 0 || _secondPlayerScore > 0)
-			{
-				return $"{scoreLookup[_firstPlayerScore]} {scoreLookup[_secondPlayerScore]}";
+				return LookupScore();
 			}
-			return "Love All";
+
+			if (IsDeuce())
+			{
+				return Deuce();
+			}
+			
+			return ScoreAll();
+		}
+
+		private string ScoreAll()
+		{
+			return $"{_scoreLookup[_firstPlayerScore]} All";
+		}
+
+		private string LookupScore()
+		{
+			return $"{_scoreLookup[_firstPlayerScore]} {_scoreLookup[_secondPlayerScore]}";
+		}
+
+		private static string Deuce()
+		{
+			return "Deuce";
+		}
+
+		private bool IsDeuce()
+		{
+			return _firstPlayerScore >= 3 && _firstPlayerScore == _secondPlayerScore;
 		}
 
 		public void FirstPlayerScore()
