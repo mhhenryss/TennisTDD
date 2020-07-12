@@ -7,7 +7,7 @@ namespace VimPractice
 		[SetUp]
 		public void SetUp()
 		{
-			_tennis = new Tennis();
+			_tennis = new Tennis("Player1", "Player2");
 		}
 		private Tennis _tennis;
 
@@ -78,9 +78,46 @@ namespace VimPractice
 		[Test]
 		public void Deuce()
 		{
+			GivenDeuce();
+			ScoreShouldBe(_tennis, "Deuce");
+		}
+
+		[Test]
+		public void FirstPlayer_Adv()
+		{
+			GivenDeuce();
+			GivenFirstPlayerScore(1);
+			ScoreShouldBe(_tennis, "Player1 Adv");
+		}
+
+		[Test]
+		public void SecondPlayer_Adv()
+		{
+			GivenDeuce();
+			GivenSecondPlayerScore(1);
+			ScoreShouldBe(_tennis, "Player2 Adv");
+		}
+
+		[Test]
+		public void SecondPlayer_Win()
+		{
+			GivenDeuce();
+			GivenSecondPlayerScore(2);
+			ScoreShouldBe(_tennis, "Player2 Win");
+		}
+
+		[Test]
+		public void FirstPlayer_Win()
+		{
+			GivenDeuce();
+			GivenFirstPlayerScore(2);
+			ScoreShouldBe(_tennis, "Player1 Win");
+		}
+
+		private void GivenDeuce()
+		{
 			GivenFirstPlayerScore(3);
 			GivenSecondPlayerScore(3);
-			ScoreShouldBe(_tennis, "Deuce");
 		}
 
 		private void GivenSecondPlayerScore(int times)
